@@ -1,0 +1,51 @@
+trigger:
+  branches:
+    include:
+      - '*'
+    exclude:
+      - master
+  paths:
+    include:
+      - 'devOps/Socratic.CQRS-CI.yml'
+      - 'src/Socratic.CQRS/*' 
+
+pool:
+  name: Default
+
+variables:
+  solution: 'src/Socratic.CQRS/Socratic.CQRS.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  majorVersion: '0'
+  minorVersion: '0'
+
+name: $(Date:yyyy).$(Date:MM).$(Date:dd).$(rev:r)
+steps:
+- task: NuGetToolInstaller@0  
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: SocraticProgrammer.Dotnet-Nuget-Build-Task.Socratic-Dotnet-Nuget-Build-Task.SocraticProgrammer_DotnetNugetTask@1
+  displayName: 'Dotnet Nuget Pack '
+  inputs:
+    project: '$(solution)'
+    output: '$(Build.ArtifactStagingDirectory)'
+    majorVersion: '$(majorVersion)'
+    minorVersion: '$(minorVersion)'
+
+- task: NuGetCommand@2
+  displayName: 'If Not dev Branch then Push to Socratic Nuget Feed'
+  inputs:
+    command: push
+    publishVstsFeed: '091fabce-37eb-440e-a497-b539df8c79a8'
+  condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/dev'))
+
+- task: NuGetCommand@2
+  displayName: 'If dev Branch then Push to Public Nuget Feed'
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: Nuget
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
