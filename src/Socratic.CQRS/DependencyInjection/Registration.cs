@@ -17,11 +17,11 @@ namespace Socratic.CQRS.DependencyInjection
             services.AddSingleton<IBroker, Broker>();
 
             var config = new CqrsConfig();
-            configFunc(config);
+            if (configFunc != null)
+                configFunc(config);
             
             var handlerTypes = assembly.GetTypes()
-                .Where(x => x.GetInterfaces().Any(IsHandlerInterface))
-                .Where(x => x.Name.EndsWith("Handler"))
+                .Where(x => x.GetInterfaces().Any(y => IsHandlerInterface(y) && !IsDecorator(y)))
                 .ToList();
 
             foreach (var type in handlerTypes)
@@ -109,6 +109,16 @@ namespace Socratic.CQRS.DependencyInjection
             var typeDef = type.GetGenericTypeDefinition();
 
             return typeDef == typeof(IRequestHandler<,>);
+        }
+
+        private static bool IsDecorator(Type type)
+        {
+            if (!type.IsGenericType)
+                return false;
+            
+            var typeDef = type.GetGenericTypeDefinition();
+
+            return typeDef == typeof(CqrsDecorator<,>);
         }
 
         private static Type ToDecorator(object attribute, CqrsConfig config)
