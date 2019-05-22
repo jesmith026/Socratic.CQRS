@@ -1,7 +1,13 @@
 trigger:
   branches:
+    include:
+      - '*'
     exclude:
       - master
+  paths:
+    include:
+      - 'devOps/Socratic.CQRS.Abstractions-CI.yml'
+      - 'src/Socratic.CQRS.Abstractions/*'    
 
 pool:
   name: Default

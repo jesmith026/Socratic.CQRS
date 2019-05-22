@@ -1,7 +1,13 @@
 trigger:
   branches:
+    include:
+      - '*'
     exclude:
       - master
+  paths:
+    include:
+      - 'devOps/Socratic.CQRS-CI.yml'
+      - 'src/Socratic.CQRS/*' 
 
 pool:
   name: Default
