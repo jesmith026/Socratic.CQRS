@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Socratic.CQRS.Abstractions;
 using Socratic.CQRS.Abstractions.Attributes;
 using Socratic.CQRS.Abstractions.Decorators;
+using Socratic.CQRS.Attributes;
+using Socratic.CQRS.Decorators;
 using Socratic.CQRS.Exceptions;
 
 namespace Socratic.CQRS.DependencyInjection
