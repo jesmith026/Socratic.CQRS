@@ -5,20 +5,20 @@ using Microsoft.Extensions.Logging;
 
 namespace Socratic.CQRS.Abstractions.Decorators
 {
-    public class AuditDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public class AuditDecorator<TRequest, TResponse> : CqrsDecorator<TRequest, TResponse> 
         where TRequest : IRequest<TResponse>
     {
         private readonly IRequestHandler<TRequest, TResponse> handler;
         private readonly ILogger logger;
         private readonly Guid trackingId = Guid.NewGuid();
 
-        public AuditDecorator(IRequestHandler<TRequest, TResponse> handler, ILogger logger)
+        public AuditDecorator(IRequestHandler<TRequest, TResponse> handler, ILogger logger) : base(handler)
         {
             this.handler = handler;
             this.logger = logger;
         }
 
-        public async Task<TResponse> HandleAsync(TRequest request)
+        public override async Task<TResponse> HandleAsync(TRequest request)
         {
             string requestJson = JsonSerializer.ToString(request);
 
