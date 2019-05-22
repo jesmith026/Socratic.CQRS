@@ -1,7 +1,13 @@
 trigger:
   branches:
+    include:
+      - '*'
     exclude:
       - master
+  paths:
+    include:
+      - 'devOps/Socratic.CQRS-CI.yml'
+      - 'src/Socratic.CQRS/*' 
 
 pool:
   name: Default
@@ -10,7 +16,7 @@ variables:
   solution: 'src/Socratic.CQRS/Socratic.CQRS.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  majorVersion: '0'
+  majorVersion: '1'
   minorVersion: '0'
 
 name: $(Date:yyyy).$(Date:MM).$(Date:dd).$(rev:r)

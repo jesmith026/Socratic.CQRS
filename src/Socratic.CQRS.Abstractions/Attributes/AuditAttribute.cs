@@ -2,10 +2,8 @@ using System;
 
 namespace Socratic.CQRS.Abstractions.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
-    public sealed class AuditAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
+    public sealed class AuditAttribute : CqrsAttribute
     {
-        public AuditAttribute() 
-        {}
     }
 }
