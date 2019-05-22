@@ -8,13 +8,12 @@ namespace Socratic.CQRS.Abstractions.Decorators
     public class AuditDecorator<TRequest, TResponse> : CqrsDecorator<TRequest, TResponse> 
         where TRequest : IRequest<TResponse>
     {
-        private readonly IRequestHandler<TRequest, TResponse> handler;
         private readonly ILogger logger;
         private readonly Guid trackingId = Guid.NewGuid();
 
-        public AuditDecorator(IRequestHandler<TRequest, TResponse> handler, ILogger logger) : base(handler)
+        public AuditDecorator(IRequestHandler<TRequest, TResponse> handler, ILogger logger) 
+            : base(handler)
         {
-            this.handler = handler;
             this.logger = logger;
         }
 
@@ -26,7 +25,7 @@ namespace Socratic.CQRS.Abstractions.Decorators
 
             try
             {
-                var response = await handler.HandleAsync(request);
+                var response = await Handler.HandleAsync(request);
 
                 logger.LogInformation($"{trackingId} | Request execution of type {request.GetType().Name}");
 
