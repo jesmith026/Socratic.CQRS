@@ -16,7 +16,7 @@ variables:
   solution: 'src/Socratic.CQRS.Abstractions/Socratic.CQRS.Abstractions.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  majorVersion: '0'
+  majorVersion: '1'
   minorVersion: '0'
 
 name: $(Date:yyyy).$(Date:MM).$(Date:dd).$(rev:r)
