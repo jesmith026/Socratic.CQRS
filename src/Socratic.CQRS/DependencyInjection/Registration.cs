@@ -14,9 +14,9 @@ namespace Socratic.CQRS.DependencyInjection
 {
     public static class Registration
     {
-        public static void UseCqrs(this IServiceCollection services, Assembly assembly, Action<CqrsConfig> configFunc = null)
+        public static void AddCqrs(this IServiceCollection services, Assembly assembly, Action<CqrsConfig> configFunc = null)
         {
-            services.AddSingleton<IBroker, Broker>();
+            services.AddScoped<IBroker, Broker>();
 
             var config = new CqrsConfig();
             if (configFunc != null)
