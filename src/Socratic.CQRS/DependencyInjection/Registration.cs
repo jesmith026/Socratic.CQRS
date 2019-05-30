@@ -14,7 +14,7 @@ namespace Socratic.CQRS.DependencyInjection
 {
     public static class Registration
     {
-        public static void AddCqrs(this IServiceCollection services, Assembly assembly, Action<CqrsConfig> configFunc = null)
+        public static void AddCqrs(this IServiceCollection services, Assembly assembly, Action<CqrsConfig>? configFunc = null)
         {
             services.AddScoped<IBroker, Broker>();
 
@@ -61,6 +61,7 @@ namespace Socratic.CQRS.DependencyInjection
             
             Func<IServiceProvider, object> func = (provider) => 
             {
+                #pragma warning disable nullable
                 object current = null;
 
                 foreach (ConstructorInfo ctor in ctors)
@@ -71,6 +72,7 @@ namespace Socratic.CQRS.DependencyInjection
                 }
 
                 return current;
+                #pragma warning restore nullable
             };
 
             return func;
