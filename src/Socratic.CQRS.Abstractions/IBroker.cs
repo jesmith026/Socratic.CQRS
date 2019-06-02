@@ -14,15 +14,15 @@ namespace Socratic.CQRS.Abstractions
         /// <param name="request"></param>
         /// <typeparam name="TResponse"></typeparam>
         /// <returns>The response from the handler</returns>
-         TResponse Dispatch<TResponse>(IRequest<TResponse> request) => DispatchAsync(request).Result;
+        TResponse Dispatch<TResponse>(IRequest<TResponse> request) => DispatchAsync(request).Result;
 
-         /// <summary>
+        /// <summary>
         /// Asynchronously sends a request to a single handler
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <typeparam name="TResponse"></typeparam>
         /// <returns>A task representing the dispatch operation. The task result is the handler response.</returns>
-         Task<TResponse> DispatchAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
+        Task<TResponse> DispatchAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default);
     }
 }
