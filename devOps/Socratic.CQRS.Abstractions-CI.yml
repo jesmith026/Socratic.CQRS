@@ -7,13 +7,13 @@ trigger:
   paths:
     include:
       - 'devOps/Socratic.CQRS.Abstractions-CI.yml'
-      - 'src/Socratic.CQRS.Abstractions/*'    
+      - 'src/Abstraction/*'    
 
 pool:
   name: Default
 
 variables:
-  solution: 'src/Socratic.CQRS.Abstractions/Socratic.CQRS.Abstractions.csproj'
+  solution: 'src/Abstraction/Socratic.CQRS.Abstractions.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   majorVersion: '1'
