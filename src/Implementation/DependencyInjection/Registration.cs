@@ -4,17 +4,27 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Socratic.CQRS.Abstractions;
-using Socratic.CQRS.Abstractions.Attributes;
+using Socratic.CQRS.Abstractions.Annotations;
 using Socratic.CQRS.Abstractions.Decorators;
-using Socratic.CQRS.Attributes;
+using Socratic.CQRS.Annotations;
 using Socratic.CQRS.Decorators;
 using Socratic.CQRS.Exceptions;
 
 namespace Socratic.CQRS.DependencyInjection
 {
+    /// <summary>
+    /// Responsible for registrations needed to implement CQRS
+    /// </summary>
+    #pragma warning disable nullable
     public static class Registration
     {
-        public static void AddCqrs(this IServiceCollection services, Assembly assembly, Action<CqrsConfig>? configFunc = null)
+        /// <summary>
+        /// Add CQRS dependencies to the service collection.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="assembly"></param>
+        /// <param name="configFunc"></param>
+        public static void AddCqrs(this IServiceCollection services, Assembly assembly, Action<CqrsConfig> configFunc = null)
         {
             services.AddScoped<IBroker, Broker>();
 
@@ -32,7 +42,7 @@ namespace Socratic.CQRS.DependencyInjection
             }
         }        
 
-        public static void AddHandler(IServiceCollection services, Type type, CqrsConfig config)
+        private static void AddHandler(IServiceCollection services, Type type, CqrsConfig config = null)
         {
             var attributes = type.GetCustomAttributes(false);
 
@@ -60,8 +70,7 @@ namespace Socratic.CQRS.DependencyInjection
                 .ToList();
             
             Func<IServiceProvider, object> func = (provider) => 
-            {
-                #pragma warning disable nullable
+            {                
                 object current = null;
 
                 foreach (ConstructorInfo ctor in ctors)
@@ -71,8 +80,7 @@ namespace Socratic.CQRS.DependencyInjection
                     current = ctor.Invoke(parameters);
                 }
 
-                return current;
-                #pragma warning restore nullable
+                return current;                
             };
 
             return func;
@@ -141,6 +149,7 @@ namespace Socratic.CQRS.DependencyInjection
                 throw new UnregisteredAttributeException(type);
 
             return result;
-        }
+        }        
     }
+    #pragma warning restore nullable
 }

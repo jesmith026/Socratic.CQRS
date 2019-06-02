@@ -5,6 +5,7 @@ using Socratic.CQRS.Abstractions;
 
 namespace Socratic.CQRS
 {
+    /// <inheritdoc/>
     public class Broker : IBroker
     {        
         private readonly IServiceProvider provider;
@@ -14,6 +15,7 @@ namespace Socratic.CQRS
             this.provider = provider;
         }
 
+        /// <inheritdoc/>
         public async Task<TResponse> DispatchAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
         {
             var type = typeof(IRequestHandler<,>);

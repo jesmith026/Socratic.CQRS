@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{60E79CE3-E7DF-4FDF-ACD3-6C4F79A41FD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socratic.CQRS.Abstractions", "src\Socratic.CQRS.Abstractions\Socratic.CQRS.Abstractions.csproj", "{FBD6C7C6-151B-414D-BD8D-3BC704CD50BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socratic.CQRS.Abstractions", "src\Abstraction\Socratic.CQRS.Abstractions.csproj", "{FBD6C7C6-151B-414D-BD8D-3BC704CD50BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socratic.CQRS", "src\Socratic.CQRS\Socratic.CQRS.csproj", "{912DB6F9-BC88-43A3-B527-77B2ED7892F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socratic.CQRS", "src\Implementation\Socratic.CQRS.csproj", "{912DB6F9-BC88-43A3-B527-77B2ED7892F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
