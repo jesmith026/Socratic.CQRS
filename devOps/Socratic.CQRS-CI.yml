@@ -7,13 +7,13 @@ trigger:
   paths:
     include:
       - 'devOps/Socratic.CQRS-CI.yml'
-      - 'src/Socratic.CQRS/*' 
+      - 'src/Implementation/*' 
 
 pool:
   name: Default
 
 variables:
-  solution: 'src/Socratic.CQRS/Socratic.CQRS.csproj'
+  solution: 'src/Implementation/Socratic.CQRS.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   majorVersion: '1'
