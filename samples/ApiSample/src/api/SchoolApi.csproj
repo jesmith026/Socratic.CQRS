@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview5-19227-01" />    
+    <PackageReference Include="Socratic.CQRS" Version="1.0.6" />
+    <PackageReference Include="Socratic.CQRS.Abstractions" Version="1.0.4" />
+  </ItemGroup>
+
+</Project>
